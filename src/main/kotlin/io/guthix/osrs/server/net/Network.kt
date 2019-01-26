@@ -21,7 +21,8 @@ fun networkBootstrap(port: Int) {
             childOption(ChannelOption.WRITE_BUFFER_WATER_MARK, WriteBufferWaterMark(8192, 131072))
             childHandler(object : ChannelInitializer<SocketChannel>() {
                 override fun initChannel(channel: SocketChannel) {
-                    TODO()
+                    channel.pipeline().addLast(ConnectionTypeDecoder::class.qualifiedName, ConnectionTypeDecoder())
+                    channel.pipeline().addLast(ConnectionTypeHandler::class.qualifiedName, ConnectionTypeHandler())
                 }
             })
         }.bind(port).sync().apply {
