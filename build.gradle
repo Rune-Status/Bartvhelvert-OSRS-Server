@@ -7,6 +7,8 @@ version '0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -14,6 +16,7 @@ dependencies {
     implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect'
     implementation group: 'io.netty', name: 'netty-all', version: nettyVersion
     implementation group: 'io.github.microutils', name: 'kotlin-logging', version: kotlinLoggingVersion
+    implementation group: 'com.github.guthix', name: 'OSRS-Cache', version: 'master-SNAPSHOT'
 }
 
 compileKotlin {
@@ -21,4 +24,8 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
