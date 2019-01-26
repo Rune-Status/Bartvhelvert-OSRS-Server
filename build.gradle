@@ -11,6 +11,9 @@ repositories {
 
 dependencies {
     implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect'
+    implementation group: 'io.netty', name: 'netty-all', version: nettyVersion
+    implementation group: 'io.github.microutils', name: 'kotlin-logging', version: kotlinLoggingVersion
 }
 
 compileKotlin {
