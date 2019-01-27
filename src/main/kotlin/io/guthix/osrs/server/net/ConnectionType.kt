@@ -16,11 +16,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package io.guthix.osrs.server.net
 
-import io.guthix.osrs.server.revision
+import io.guthix.osrs.server.gameConfig
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPipeline
-import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.codec.ByteToMessageDecoder
 import java.io.IOException
 
@@ -53,7 +52,7 @@ class ConnectionTypeHandler : ForcableChannelInboundHandler<IncPacket>() {
         when(msg) {
             is RevisionHandshakePacket -> {
                 ctx.pipeline().addStatusResponseEncoder()
-                if(msg.revision != revision) {
+                if(msg.revision != gameConfig.revision) {
                     ctx.channel().writeAndFlush(StatusResponse.OUT_OF_DATE)
                     ctx.close()
                 } else {

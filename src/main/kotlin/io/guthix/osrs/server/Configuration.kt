@@ -16,20 +16,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package io.guthix.osrs.server
 
-import io.guthix.osrs.server.net.networkBootstrap
-import io.guthix.osrs.server.serialization.GameConfig
-import io.guthix.osrs.server.serialization.NetworkConfig
-import io.guthix.osrs.server.serialization.SecurityConfig
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
-lateinit var gameConfig: GameConfig
+interface Configuration
 
-lateinit var networkConfig: NetworkConfig
-
-lateinit var securityConfig: SecurityConfig
-
-fun main(args: Array<String>) {
-    gameConfig = loadConfiguration("game")
-    networkConfig = loadConfiguration("network")
-    securityConfig = loadConfiguration("security")
-    networkBootstrap(networkConfig.port)
+inline fun <reified C : Configuration> loadConfiguration(fileName: String): C {
+    val mapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
+    val javaClass = C::class.java
+    return mapper.readValue(javaClass.getResource("/config/$fileName.yml"), javaClass)
 }

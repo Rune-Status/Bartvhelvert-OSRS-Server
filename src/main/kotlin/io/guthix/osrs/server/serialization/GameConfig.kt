@@ -14,22 +14,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.guthix.osrs.server
+package io.guthix.osrs.server.serialization
 
-import io.guthix.osrs.server.net.networkBootstrap
-import io.guthix.osrs.server.serialization.GameConfig
-import io.guthix.osrs.server.serialization.NetworkConfig
-import io.guthix.osrs.server.serialization.SecurityConfig
+import io.guthix.osrs.server.Configuration
 
-lateinit var gameConfig: GameConfig
-
-lateinit var networkConfig: NetworkConfig
-
-lateinit var securityConfig: SecurityConfig
-
-fun main(args: Array<String>) {
-    gameConfig = loadConfiguration("game")
-    networkConfig = loadConfiguration("network")
-    securityConfig = loadConfiguration("security")
-    networkBootstrap(networkConfig.port)
-}
+data class GameConfig(val revision: Int) : Configuration
