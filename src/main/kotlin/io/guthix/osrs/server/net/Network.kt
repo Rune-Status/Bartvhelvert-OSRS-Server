@@ -1,5 +1,4 @@
 /*
-OSRS-Server
 Copyright (C) 2019 Guthix
 
 This program is free software: you can redistribute it and/or modify
@@ -61,7 +60,7 @@ fun networkBootstrap(port: Int) {
 
 interface IncPacket
 
-abstract class QuirkChannelInboundHandler<P : IncPacket> : SimpleChannelInboundHandler<P>() {
+abstract class ForcableChannelInboundHandler<P : IncPacket> : SimpleChannelInboundHandler<P>() {
     override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
         if (!cause.message.equals("An existing connection was forcibly closed by the remote host")) {
             cause.printStackTrace()

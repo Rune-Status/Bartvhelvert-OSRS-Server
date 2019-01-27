@@ -1,5 +1,4 @@
 /*
-OSRS-Server
 Copyright (C) 2019 Guthix
 
 This program is free software: you can redistribute it and/or modify

@@ -1,5 +1,4 @@
 /*
-OSRS-Server
 Copyright (C) 2019 Guthix
 
 This program is free software: you can redistribute it and/or modify
@@ -49,7 +48,7 @@ class ConnectionTypeDecoder : ByteToMessageDecoder() {
 
 class RevisionHandshakePacket(val revision: Int): IncPacket
 
-class ConnectionTypeHandler : SimpleChannelInboundHandler<IncPacket>() {
+class ConnectionTypeHandler : ForcableChannelInboundHandler<IncPacket>() {
     override fun channelRead0(ctx: ChannelHandlerContext, msg: IncPacket) {
         when(msg) {
             is RevisionHandshakePacket -> {
